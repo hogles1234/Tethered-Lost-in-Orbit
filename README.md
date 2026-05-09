@@ -62,8 +62,7 @@ git merge main
 ---
 
 ## 📂 Project File Structure & Git Submission Guide
-IN SHORT GUYS, GANYAN PO YUNG FILES NA I-AADD NIYO 
-PWEDE RIN KAYO MAG EDIT CODE WITHIN .cs
+
 When writing your features, All code must be implemented directly in Visual Studio using proper C# files and added to the folder structure below. This keeps our unified namespace compilation working and prevents breaking the `.csproj` file during merges.
 
 ```text
@@ -98,7 +97,11 @@ When writing your features, All code must be implemented directly in Visual Stud
 * Put pixel art textures (`.png` files) into the `📁 Assets` directory.
 * Put rendering classes into `📁 Core` to draw onto the main Graphics canvas.
 
+Adding Files: If you are creating a new script (like a new class for an enemy or a new puzzle window), you will add a new .cs (C#) file or a new UserControl inside Visual Studio.
 
+Editing Code: If you are working on a feature that needs to talk to the player's stats or save a checkpoint, you will open the existing .cs files (like Player.cs or MainGameForm.cs) and write your code directly inside the template hooks we set up.
+
+Guys, make sure you only add and edit these files inside Visual Studio while you are on your own Git branch! Don't drag and drop files directly into the folders using Windows File Explorer, or Visual Studio won't register them in the project.
 
 ---
 
