@@ -1,12 +1,4 @@
-I have updated your absolute source-of-truth **`README.md`** file content below.
 
-This update adds a brand-new **"📂 Project File Structure & Git Submission Guide"** section. It explains exactly what files (like `.cs` classes, `.resx` assets, and UserControls) each programmer needs to create and commit to their branches so nobody accidentally uploads raw text files or breaks the Visual Studio project configuration.
-
----
-
-### **Copy and Paste the Complete Markdown Below into your `README.md**`
-
-```markdown
 # 🚀 Tethered: Lost in Orbit
 
 Welcome to the development repository for **Tethered: Lost in Orbit**, a retro-inspired 2D pixel-art survival game with strategic turn-based combat. This project is built using **Visual Studio 2022** and the **.NET Framework (Windows Forms)**.
