@@ -58,6 +58,12 @@ git merge main
 * `feature/interactive-puzzles` — Sector mini-games (CO2, Security, Electrical, Navigation).
 * `feature/engine-room-climax` — Final act timers, camera tracking, final override logic.
 
+<img width="1380" height="718" alt="step2" src="https://github.com/user-attachments/assets/c6a702c3-073c-433d-899e-3028e32a95aa" />
+<img width="1434" height="846" alt="step1" src="https://github.com/user-attachments/assets/e090bbc3-19f0-49e6-b47a-27383c5b7c74" />
+
+<img width="1383" height="683" alt="step4" src="https://github.com/user-attachments/assets/a7c9e788-c335-40da-bd1a-fa5c5e9ff131" />
+<img width="1444" height="832" alt="step3" src="https://github.com/user-attachments/assets/7c277773-e654-498e-b74e-0ab4c712e3f1" />
+
 ---
 
 ## 📏 Strict Coding & Naming Guidelines
