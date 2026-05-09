@@ -62,8 +62,9 @@ git merge main
 ---
 
 ## 📂 Project File Structure & Git Submission Guide
-
-When writing your features, **do not write code in raw text files (`.txt`).** All code must be implemented directly in Visual Studio using proper C# files and added to the folder structure below. This keeps our unified namespace compilation working and prevents breaking the `.csproj` file during merges.
+IN SHORT GUYS, GANYAN PO YUNG FILES NA I-AADD NIYO 
+PWEDE RIN KAYO MAG EDIT CODE WITHIN .cs
+When writing your features, All code must be implemented directly in Visual Studio using proper C# files and added to the folder structure below. This keeps our unified namespace compilation working and prevents breaking the `.csproj` file during merges.
 
 ```text
 📁 TetheredGame
