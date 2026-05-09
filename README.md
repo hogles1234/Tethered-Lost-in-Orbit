@@ -145,6 +145,82 @@ Ensure your custom classes are saved in the correct physical folders so namespac
 If you are referencing player or enemy data in your scripts, use these exact property names:
 
 ### `Player` Properties:
+using System;
+using System.Collections.Generic;
+
+namespace TetheredGame.Models
+{
+    public class Player
+    {
+        // Character Role and Stats
+        public string ClassRole { get; set; }        // "Architect", "Analyst", "Warden"
+        public int MaxHP { get; set; }
+        public int CurrentHP { get; set; }
+        public int BaseDamage { get; set; }          // Analyst = 8, Architect = 10, Warden = 20
+        public double BaseDefense { get; set; }      // 0.0 to 1.0 (Percentage reduction)
+        public int MoveSpeed { get; set; }           
+        public double EscapeRate { get; set; }       // Analyst = 0.85 (85%)
+
+        // Inventory Systems
+        public int InventoryCapacity { get; set; }   // Max storage capacity
+        public List<string> Inventory { get; set; }  // List of Item IDs (e.g., "Filter", "Fuse")
+        
+        // Environmental Gear & Survival Stats
+        public bool HasFlashlight { get; set; }      // Toggles sight radius (false = 2, true = 5)
+        public int OxygenLevel { get; set; }         // Ticks down from 100 to 0
+
+        // Position on 2D Grid
+        public int GridX { get; set; }
+        public int GridY { get; set; }
+
+        public Player(string role)
+        {
+            ClassRole = role;
+            Inventory = new List<string>();
+            HasFlashlight = false;
+            OxygenLevel = 100;
+            InitializeRoleStats();
+        }
+
+        private void InitializeRoleStats()
+        {
+            switch (ClassRole)
+            {
+                case "Analyst":
+                    MaxHP = 50;
+                    CurrentHP = 50;
+                    BaseDamage = 8;
+                    BaseDefense = 0.05;
+                    EscapeRate = 0.85;
+                    InventoryCapacity = 15;
+                    break;
+
+                case "Architect":
+                    MaxHP = 80;
+                    CurrentHP = 80;
+                    BaseDamage = 10;
+                    BaseDefense = 0.15;
+                    EscapeRate = 0.45;
+                    InventoryCapacity = 8;
+                    break;
+
+                case "Warden":
+                    MaxHP = 150;
+                    CurrentHP = 150;
+                    BaseDamage = 20;
+                    BaseDefense = 0.40;
+                    EscapeRate = 0.25;
+                    InventoryCapacity = 6;
+                    break;
+            }
+        }
+
+        // --- EXTENSION HOOKS FOR TEAM MEMBERS ---
+        // TODO (Combat Programmer): Implement TakeDamage(int damage)
+        // TODO (Combat Programmer): Implement UseHealingItem()
+        // TODO (Inventory Programmer): Implement AddToInventory(string itemId)
+    }
+}
 
 * `ClassRole` (`string`) — `"Architect"`, `"Analyst"`, or `"Warden"`
 * `CurrentHP` / `MaxHP` (`int`) — Player health points
@@ -154,6 +230,67 @@ If you are referencing player or enemy data in your scripts, use these exact pro
 * `OxygenLevel` (`int`) — 0 to 100 countdown value
 
 ### `Enemy` Properties:
+using System;
+
+namespace TetheredGame.Models
+{
+    public class Enemy
+    {
+        public string EnemyType { get; set; }        // "Crawler", "Mimic", "Parasite"
+        public int MaxHP { get; set; }
+        public int CurrentHP { get; set; }
+        public int AttackPower { get; set; }
+        public int MoveSpeed { get; set; }
+        public double EscapeDifficulty { get; set; } // Modifies the player escape chance
+        
+        // Grid Placement
+        public int GridX { get; set; }
+        public int GridY { get; set; }
+        public bool IsAlertState { get; set; }       // Yellow alert after player flees
+
+        public Enemy(string type, int startX, int startY)
+        {
+            EnemyType = type;
+            GridX = startX;
+            GridY = startY;
+            IsAlertState = false;
+            InitializeEnemyStats();
+        }
+
+        private void InitializeEnemyStats()
+        {
+            switch (EnemyType)
+            {
+                case "Crawler":
+                    MaxHP = 35;
+                    CurrentHP = 35;
+                    AttackPower = 8;
+                    MoveSpeed = 3;
+                    EscapeDifficulty = 0.0;
+                    break;
+
+                case "Mimic":
+                    MaxHP = 60;
+                    CurrentHP = 60;
+                    AttackPower = 12; // Base
+                    MoveSpeed = 1;
+                    EscapeDifficulty = -0.15; // Makes escaping 15% harder
+                    break;
+
+                case "Parasite":
+                    MaxHP = 20;
+                    CurrentHP = 20;
+                    AttackPower = 4;
+                    MoveSpeed = 2;
+                    EscapeDifficulty = 0.15; // Makes escaping 15% easier
+                    break;
+            }
+        }
+
+        // --- EXTENSION HOOKS FOR TEAM MEMBERS ---
+        // TODO (AI/Grid Programmer): Implement UpdatePatrolPath(Tile[,] mapGrid)
+    }
+}
 
 * `EnemyType` (`string`) — `"Crawler"`, `"Mimic"`, or `"Parasite"`
 * `CurrentHP` / `MaxHP` (`int`) — Enemy health points
