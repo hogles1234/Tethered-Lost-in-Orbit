@@ -337,3 +337,5 @@ namespace TetheredGame.Models
 
 ```
 
+<img width="1698" height="958" alt="image" src="https://github.com/user-attachments/assets/d6333801-e251-46ee-94ea-806967e6883a" />
+this is how to change .cs name
