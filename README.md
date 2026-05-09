@@ -1,4 +1,12 @@
+Here is the fully polished, structural update to your **`README.md`**.
 
+I have cleaned up the formatting of the C# code blocks (which had slipped out of their containers), neatly nested the full code implementations directly under their respective classes, and added a highly visible note under the branch section emphasizing that these are only the **initial core branches** and that team members are welcome and encouraged to create more as development evolves.
+
+---
+
+### **Copy and Paste the Complete Markdown Below into your `README.md**`
+
+```markdown
 # 🚀 Tethered: Lost in Orbit
 
 Welcome to the development repository for **Tethered: Lost in Orbit**, a retro-inspired 2D pixel-art survival game with strategic turn-based combat. This project is built using **Visual Studio 2022** and the **.NET Framework (Windows Forms)**.
@@ -6,7 +14,7 @@ Welcome to the development repository for **Tethered: Lost in Orbit**, a retro-i
 ---
 
 ## 🗺️ Map Layout Draft
-Keep this ship layout in mind as you program transitions, room boundaries, and coordinate coordinates!
+Keep this ship layout in mind as you program transitions, room boundaries, and coordinates!
 * **Sectors:** Main Hall, CO2, Security, Navigation, Electrical, Reactor (North & South), and Engine.
 
 ---
@@ -14,8 +22,7 @@ Keep this ship layout in mind as you program transitions, room boundaries, and c
 ## 🛠️ Getting Started
 
 ### 1. Prerequisites
-* **IDE:** [Visual Studio 2022/2026](https://visualstudio.microsoft.com/vs/) 
-  
+* **IDE:** [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
 * **Workload:** Make sure you have **.NET Desktop Development** installed in your Visual Studio Installer.
 * **Target Framework:** `.NET Framework 4.8` or newer.
 
@@ -49,7 +56,9 @@ git merge main
 
 * 📢 **Pull Requests (PR):** When your feature is complete and tested, push your branch to GitHub and open a Pull Request to merge it into `main`. At least one other team member must review it before it is merged.
 
-### Active Feature Branches:
+> ⚠️ **IMPORTANT NOTE ON BRANCHES:** > The active branches listed below are our **initial core setup**. You are NOT limited to just these branches! As we build the game, feel free to create new sub-branches (e.g., `feature/combat-animations`, `feature/sound-effects`) from `main` as needed. Just make sure to name them with the `feature/` prefix so the repository stays organized!
+
+### Initial Active Feature Branches:
 
 * `feature/engine-grid-movement` — Grid arrays, coordinates, player movement, collisions.
 * `feature/turn-based-combat` — RPG battle screens, combat turn loops, class calculations.
@@ -63,7 +72,7 @@ git merge main
 
 ## 📂 Project File Structure & Git Submission Guide
 
-When writing your features, All code must be implemented directly in Visual Studio using proper C# files and added to the folder structure below. This keeps our unified namespace compilation working and prevents breaking the `.csproj` file during merges.
+When writing your features, **do not write code in raw text files (`.txt`).** All code must be implemented directly in Visual Studio using proper C# files and added to the folder structure below. This keeps our unified namespace compilation working and prevents breaking the `.csproj` file during merges.
 
 ```text
 📁 TetheredGame
@@ -97,11 +106,9 @@ When writing your features, All code must be implemented directly in Visual Stud
 * Put pixel art textures (`.png` files) into the `📁 Assets` directory.
 * Put rendering classes into `📁 Core` to draw onto the main Graphics canvas.
 
-Adding Files: If you are creating a new script (like a new class for an enemy or a new puzzle window), you will add a new .cs (C#) file or a new UserControl inside Visual Studio.
 
-Editing Code: If you are working on a feature that needs to talk to the player's stats or save a checkpoint, you will open the existing .cs files (like Player.cs or MainGameForm.cs) and write your code directly inside the template hooks we set up.
 
-Guys, make sure you only add and edit these files inside Visual Studio while you are on your own Git branch! Don't drag and drop files directly into the folders using Windows File Explorer, or Visual Studio won't register them in the project.
+> 💡 **Visual Studio Integration Rule:** > Make sure you only add and edit these files inside Visual Studio while you are on your own Git branch! **Don't drag and drop files directly into the folders using Windows File Explorer**, or Visual Studio won't register them in the project (`.csproj` configuration), which will break the build for other team members.
 
 ---
 
@@ -140,11 +147,17 @@ Ensure your custom classes are saved in the correct physical folders so namespac
 
 ---
 
-## 🗃️ Unified Data Dictionary (Do Not Modify Core Types!)
+## 🗃️ Unified Data Dictionary & Reference Templates
 
-If you are referencing player or enemy data in your scripts, use these exact property names:
+Do not modify these core properties! If you are referencing player or enemy data in your scripts, you must use these exact property names and data types.
 
-### `Player` Properties:
+### 📁 Core Models (`TetheredGame/Models`)
+
+#### `Player.cs`
+
+Tracks player attributes, current roles, health, inventory, coordinate positioning, and resource baselines.
+
+```csharp
 using System;
 using System.Collections.Generic;
 
@@ -222,14 +235,13 @@ namespace TetheredGame.Models
     }
 }
 
-* `ClassRole` (`string`) — `"Architect"`, `"Analyst"`, or `"Warden"`
-* `CurrentHP` / `MaxHP` (`int`) — Player health points
-* `BaseDamage` (`int`) / `BaseDefense` (`double`) — Combat attributes
-* `GridX` / `GridY` (`int`) — Player coordinates on the active grid
-* `HasFlashlight` (`bool`) — Determines if visibility radius is $2 \times 2$ or $5 \times 5$
-* `OxygenLevel` (`int`) — 0 to 100 countdown value
+```
 
-### `Enemy` Properties:
+#### `Enemy.cs`
+
+Tracks active hostile entities, their respective stat scaling, combat damage levels, and positional tracking.
+
+```csharp
 using System;
 
 namespace TetheredGame.Models
@@ -272,7 +284,7 @@ namespace TetheredGame.Models
                 case "Mimic":
                     MaxHP = 60;
                     CurrentHP = 60;
-                    AttackPower = 12; // Base
+                    AttackPower = 12; 
                     MoveSpeed = 1;
                     EscapeDifficulty = -0.15; // Makes escaping 15% harder
                     break;
@@ -292,11 +304,44 @@ namespace TetheredGame.Models
     }
 }
 
-* `EnemyType` (`string`) — `"Crawler"`, `"Mimic"`, or `"Parasite"`
-* `CurrentHP` / `MaxHP` (`int`) — Enemy health points
-* `GridX` / `GridY` (`int`) — Current location on the grid
-* `IsAlertState` (`bool`) — Buffed movement state if player flees combat
+```
+
+#### `Tile.cs`
+
+Defines layout tiles, walkability states, and overlays for items or gas/electricity environmental hazards.
+
+```csharp
+using System.Drawing;
+
+namespace TetheredGame.Models
+{
+    public class Tile
+    {
+        public int GridX { get; set; }
+        public int GridY { get; set; }
+        public bool IsWalkable { get; set; }
+        
+        // Item/Interactive Layer
+        public bool HasMaterial { get; set; }
+        public string MaterialID { get; set; }       // "Filter", "Fuse", "Flashlight", etc.
+        
+        // Environmental Status Hazards
+        public bool IsHazardActive { get; set; }     // Arc surge or toxic gas present
+        public string HazardType { get; set; }       // "Gas", "Electric"
+        
+        public Image SpriteTexture { get; set; }     // The pixel art asset
+
+        public Tile(int x, int y, bool isWalkable, Image texture)
+        {
+            GridX = x;
+            GridY = y;
+            IsWalkable = isWalkable;
+            SpriteTexture = texture;
+            HasMaterial = false;
+            IsHazardActive = false;
+        }
+    }
+}
 
 ```
 
-```
