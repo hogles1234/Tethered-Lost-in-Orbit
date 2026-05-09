@@ -14,7 +14,8 @@ Keep this ship layout in mind as you program transitions, room boundaries, and c
 ## 🛠️ Getting Started
 
 ### 1. Prerequisites
-* **IDE:** [Visual Studio 2022](https://visualstudio.microsoft.com/vs/)
+* **IDE:** [Visual Studio 2022/2026](https://visualstudio.microsoft.com/vs/) 
+  
 * **Workload:** Make sure you have **.NET Desktop Development** installed in your Visual Studio Installer.
 * **Target Framework:** `.NET Framework 4.8` or newer.
 
