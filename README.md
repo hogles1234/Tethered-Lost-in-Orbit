@@ -1,12 +1,4 @@
-Here is the fully polished, structural update to your **`README.md`**.
 
-I have cleaned up the formatting of the C# code blocks (which had slipped out of their containers), neatly nested the full code implementations directly under their respective classes, and added a highly visible note under the branch section emphasizing that these are only the **initial core branches** and that team members are welcome and encouraged to create more as development evolves.
-
----
-
-### **Copy and Paste the Complete Markdown Below into your `README.md**`
-
-```markdown
 # 🚀 Tethered: Lost in Orbit
 
 Welcome to the development repository for **Tethered: Lost in Orbit**, a retro-inspired 2D pixel-art survival game with strategic turn-based combat. This project is built using **Visual Studio 2022** and the **.NET Framework (Windows Forms)**.
